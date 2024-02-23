@@ -1,8 +1,10 @@
 //Angular Imports
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 //Components
 import { AgeComponent } from './age.component';
+
 
 
 
@@ -12,6 +14,7 @@ import { AgeComponent } from './age.component';
   ],
   imports: [
     CommonModule,
+    ReactiveFormsModule
   ]
 })
 export class AgeModule { }
