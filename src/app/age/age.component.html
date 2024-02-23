@@ -1,0 +1,45 @@
+<form [formGroup]="ageForm" (ngSubmit)="calculateAge()">
+  <div class="row mb-2 box-inputs">
+    <div class="col-md-2 single-input">
+      <label for="day">DAY</label>
+      <input type="number" placeholder="DD" id="day" min="1" max="31" class="form-control" formControlName="day">
+      <div *ngIf="ageForm.get('day').invalid && ageForm.get('day').touched" class="text-danger">Invalid day</div>
+    </div>
+
+    <div class="col-md-2 single-input">
+      <label for="month">MONTH</label>
+      <input type="number" placeholder="MM" id="month" min="1" max='12' class="form-control" formControlName="month">
+      <div *ngIf="ageForm.get('month').invalid && ageForm.get('month').touched" class="text-danger">Invalid month</div>
+    </div>
+
+    <div class="col-md-2 single-input">
+      <label for="year">YEAR</label>
+      <input type="number" placeholder="YYYY" id="year" min="1900" max="2024" class="form-control"
+        formControlName="year">
+      <div *ngIf="ageForm.get('year').invalid && ageForm.get('year').touched" class="text-danger">Invalid year</div>
+    </div>
+  </div>
+
+  <div class="container-icon">
+    <hr />
+    <button class="container-icon-image">
+      <img src="./assets/images/icon-arrow.svg" alt="arrow button" />
+    </button>
+  </div>
+
+  <div class="row result-view">
+    <div class="col-md-12 display-font">
+      <label class="displayColor"><span>{{ ageYears || '--' }}</span><strong>Age</strong></label>
+    </div>
+  </div>
+  <div class="row result-view">
+    <div class="col-md-12 display-font">
+      <label class="displayColor"><span>{{ ageMonths || '--' }}</span><strong>Months</strong></label>
+    </div>
+  </div>
+  <div class="row result-view">
+    <div class="col-md-12 display-font">
+      <label class="displayColor"><span>{{ ageDays || '--' }}</span><strong>Days</strong></label>
+    </div>
+  </div>
+</form>
