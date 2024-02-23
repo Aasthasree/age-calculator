@@ -1,3 +1,4 @@
+//Angular Imports
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -6,7 +7,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   templateUrl: './age.component.html',
   styleUrls: ['./age.component.scss']
 })
-export class AgeComponent implements OnInit{
+export class AgeComponent implements OnInit {
   ageForm: FormGroup;
   ageYears: number;
   ageMonths: number;
@@ -14,15 +15,15 @@ export class AgeComponent implements OnInit{
 
   constructor(private formBuilder: FormBuilder) { }
 
-  ngOnInit(){
+  ngOnInit() {
     this.initForm();
   }
 
-  initForm(){
+  initForm() {
     this.ageForm = this.formBuilder.group({
-      day: ['',[ Validators.required, Validators.min(1), Validators.max(31)]],
-      month: ['',[ Validators.required, Validators.min(1), Validators.max(12) ]],
-      year: ['',[ Validators.required, Validators.min(1)]],
+      day: ['', [Validators.required, Validators.min(1), Validators.max(31)]],
+      month: ['', [Validators.required, Validators.min(1), Validators.max(12)]],
+      year: ['', [Validators.required, Validators.min(1)]],
     });
   }
 
