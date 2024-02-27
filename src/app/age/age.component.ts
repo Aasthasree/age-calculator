@@ -34,11 +34,11 @@ export class AgeComponent implements OnInit {
       const month = this.ageForm.get('month').value;
       const year = this.ageForm.get('year').value;
 
-     if (!this.isValidDay(day, month, year)) {
-      this.errorMessage = 'Invalid day for the selected month.';
-      return;
-    }
-    this.errorMessage = '';
+      if (!this.isValidDay(day, month, year)) {
+        this.errorMessage = 'Invalid day for the selected month.';
+        return;
+      }
+      this.errorMessage = '';
 
 
       const currentDate = new Date();
@@ -93,6 +93,5 @@ export class AgeComponent implements OnInit {
     const lastDayOfMonth = new Date(year, month, 0).getDate();
     return day <= lastDayOfMonth;
   }
- 
-}
 
+}

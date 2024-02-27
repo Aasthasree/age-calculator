@@ -23,12 +23,11 @@
 
     <div class="col-md-2 single-input">
       <label for="year">YEAR</label>
-      <input type="number" placeholder="YYYY" id="year" class="form-control"
-        formControlName="year">
-        <ng-container *ngIf="ageForm.get('year').invalid && ageForm.get('year').touched">
-          <div *ngIf="ageForm.get('year').hasError('required')" class="text-danger">This field is required.</div>
-          <div *ngIf="ageForm.get('year').hasError('max')" class="text-danger">Must be a valid year!</div>
-        </ng-container>
+      <input type="number" placeholder="YYYY" id="year" class="form-control" formControlName="year">
+      <ng-container *ngIf="ageForm.get('year').invalid && ageForm.get('year').touched">
+        <div *ngIf="ageForm.get('year').hasError('required')" class="text-danger">This field is required.</div>
+        <div *ngIf="ageForm.get('year').hasError('max')" class="text-danger">Must be a valid year!</div>
+      </ng-container>
     </div>
     <div class="col-md-12">
       <div *ngIf="errorMessage" class="text-danger">{{ errorMessage }}</div>
