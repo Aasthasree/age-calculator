@@ -23,7 +23,7 @@ export class AgeComponent implements OnInit {
     this.ageForm = this.formBuilder.group({
       day: ['', [Validators.required, Validators.min(1), Validators.max(31)]],
       month: ['', [Validators.required, Validators.min(1), Validators.max(12)]],
-      year: ['', [Validators.required, Validators.min(1)]],
+      year: ['', [Validators.required, Validators.min(1990),Validators.max(2024)]],
     });
   }
 
