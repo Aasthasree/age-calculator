@@ -3,20 +3,34 @@
     <div class="col-md-2 single-input">
       <label for="day">DAY</label>
       <input type="number" placeholder="DD" id="day" class="form-control" formControlName="day">
-      <div *ngIf="ageForm.get('day').invalid && ageForm.get('day').touched" class="text-danger">Invalid day</div>
+      <ng-container *ngIf="ageForm.get('day').invalid && ageForm.get('day').touched">
+        <div *ngIf="ageForm.get('day').hasError('required')" class="text-danger">This field is required.</div>
+        <div *ngIf="ageForm.get('day').hasError('min')" class="text-danger">Must be a valid day!</div>
+        <div *ngIf="ageForm.get('day').hasError('max')" class="text-danger">Must be a valid day!</div>
+        <div *ngIf="ageForm.get('day').hasError('invalidDays')" class="text-danger">Must be a valid day!</div>
+      </ng-container>
     </div>
 
     <div class="col-md-2 single-input">
       <label for="month">MONTH</label>
       <input type="number" placeholder="MM" id="month" class="form-control" formControlName="month">
-      <div *ngIf="ageForm.get('month').invalid && ageForm.get('month').touched" class="text-danger">Invalid month</div>
+      <ng-container *ngIf="ageForm.get('month').invalid && ageForm.get('month').touched">
+        <div *ngIf="ageForm.get('month').hasError('required')" class="text-danger">This field is required.</div>
+        <div *ngIf="ageForm.get('month').hasError('min')" class="text-danger">Must be a valid month!</div>
+        <div *ngIf="ageForm.get('month').hasError('max')" class="text-danger">Must be a valid month!</div>
+      </ng-container>
     </div>
 
     <div class="col-md-2 single-input">
       <label for="year">YEAR</label>
-      <input type="number" placeholder="YYYY" id="year" class="form-control"
-        formControlName="year">
-      <div *ngIf="ageForm.get('year').invalid && ageForm.get('year').touched" class="text-danger">Invalid year</div>
+      <input type="number" placeholder="YYYY" id="year" class="form-control" formControlName="year">
+      <ng-container *ngIf="ageForm.get('year').invalid && ageForm.get('year').touched">
+        <div *ngIf="ageForm.get('year').hasError('required')" class="text-danger">This field is required.</div>
+        <div *ngIf="ageForm.get('year').hasError('max')" class="text-danger">Must be a valid year!</div>
+      </ng-container>
+    </div>
+    <div class="col-md-12">
+      <div *ngIf="errorMessage" class="text-danger">{{ errorMessage }}</div>
     </div>
   </div>
 

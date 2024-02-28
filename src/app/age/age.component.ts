@@ -12,6 +12,7 @@ export class AgeComponent implements OnInit {
   ageYears: number;
   ageMonths: number;
   ageDays: number;
+  errorMessage: string = '';
 
   constructor(private formBuilder: FormBuilder) { }
 
@@ -23,7 +24,7 @@ export class AgeComponent implements OnInit {
     this.ageForm = this.formBuilder.group({
       day: ['', [Validators.required, Validators.min(1), Validators.max(31)]],
       month: ['', [Validators.required, Validators.min(1), Validators.max(12)]],
-      year: ['', [Validators.required, Validators.min(1990),Validators.max(2024)]],
+      year: ['', [Validators.required, Validators.max(2024)]],
     });
   }
 
@@ -33,10 +34,16 @@ export class AgeComponent implements OnInit {
       const month = this.ageForm.get('month').value;
       const year = this.ageForm.get('year').value;
 
+      if (!this.isValidDay(day, month, year)) {
+        this.errorMessage = 'Invalid day for the selected month.';
+        return;
+      }
+      this.errorMessage = '';
+
 
       const currentDate = new Date();
       const currentYear = currentDate.getFullYear();
-      const currentMonth = currentDate.getMonth() + 1;
+      const currentMonth = currentDate.getMonth();
       const currentDay = currentDate.getDate();
 
       let newYear = Math.abs(currentYear - year);
@@ -81,5 +88,10 @@ export class AgeComponent implements OnInit {
     const fullDate = new Date(year, month, day);
     return day === fullDate.getDate() && month === fullDate.getMonth() && year === fullDate.getFullYear();
   }
-}
 
+  isValidDay(day: number, month: number, year: number): boolean {
+    const lastDayOfMonth = new Date(year, month, 0).getDate();
+    return day <= lastDayOfMonth;
+  }
+
+}
