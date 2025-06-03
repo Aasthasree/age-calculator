@@ -28,60 +28,42 @@ export class AgeComponent implements OnInit {
     });
   }
 
-  calculateAge(): void {
-    if (this.ageForm.valid) {
-      const day = this.ageForm.get('day').value;
-      const month = this.ageForm.get('month').value;
-      const year = this.ageForm.get('year').value;
+ calculateAge(): void {
+  if (this.ageForm.valid) {
+    const day = this.ageForm.get('day')?.value;
+    const month = this.ageForm.get('month')?.value - 1; // JS months are 0-based
+    const year = this.ageForm.get('year')?.value;
 
-      if (!this.isValidDay(day, month, year)) {
-        this.errorMessage = 'Invalid day for the selected month.';
-        return;
-      }
-      this.errorMessage = '';
-
-
-      const currentDate = new Date();
-      const currentYear = currentDate.getFullYear();
-      const currentMonth = currentDate.getMonth();
-      const currentDay = currentDate.getDate();
-
-      let newYear = Math.abs(currentYear - year);
-      let newMonth = 0;
-      let newDay = 0;
-
-      if (currentMonth >= month) {
-        newMonth = currentMonth - month;
-      } else {
-        newYear--;
-        newMonth = 12 + currentMonth - month;
-      }
-
-      if (currentDay >= day) {
-        newDay = currentDay - day;
-      } else {
-        newMonth--;
-        if (this.isLeapYear(day, month, year)) {
-          newDay = 30 + currentDay - day;
-        } else {
-          newDay = currentDay - day;
-        }
-
-        if (newMonth < 0) {
-          newMonth = 11;
-          newYear--;
-        }
-        if (newMonth < currentMonth) {
-          newDay++;
-        }
-      }
-
-
-      this.ageYears = newYear;
-      this.ageMonths = newMonth;
-      this.ageDays = newDay;
+    if (!this.isValidDay(day, month + 1, year)) {
+      this.errorMessage = 'Invalid day for the selected month.';
+      return;
     }
+    this.errorMessage = '';
+
+    const birthDate = new Date(year, month, day);
+    const today = new Date();
+
+    let years = today.getFullYear() - birthDate.getFullYear();
+    let months = today.getMonth() - birthDate.getMonth();
+    let days = today.getDate() - birthDate.getDate();
+
+    if (days < 0) {
+      months--;
+      const previousMonth = new Date(today.getFullYear(), today.getMonth(), 0);
+      days += previousMonth.getDate();
+    }
+
+    if (months < 0) {
+      years--;
+      months += 12;
+    }
+
+    this.ageYears = years;
+    this.ageMonths = months;
+    this.ageDays = days;
   }
+}
+
 
   isLeapYear(day: number, month: number, year: number): boolean {
     month = month - 1;
